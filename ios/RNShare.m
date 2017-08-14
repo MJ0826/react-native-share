@@ -60,7 +60,6 @@ RCT_EXPORT_METHOD(shareSingle:(NSDictionary *)options
     
     NSString *social = [RCTConvert NSString:options[@"social"]];
     if (social) {
-        NSLog(social);
         if([social isEqualToString:@"facebook"]) {
             GenericShare *shareCtl = [[GenericShare alloc] init];
             [shareCtl shareSingle:options failureCallback: failureCallback successCallback: successCallback serviceType: SLServiceTypeFacebook];

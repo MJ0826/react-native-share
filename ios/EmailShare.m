@@ -14,12 +14,8 @@
     failureCallback:(RCTResponseErrorBlock)failureCallback
     successCallback:(RCTResponseSenderBlock)successCallback {
 
-    NSLog(@"Try open view");
-
     if ([options objectForKey:@"message"] && [options objectForKey:@"message"] != [NSNull null]) {
         NSString *text = [RCTConvert NSString:options[@"message"]];
-
-        NSLog(@"Try open view");
 
         NSString *subject = @"";
         NSString *message = @"";
@@ -42,7 +38,11 @@
             successCallback(@[]);
         } else {
             // Cannot open email
-            NSLog(@"Cannot open email");
+            NSString *errorMessage = @"Cannot open email";
+            NSDictionary *userInfo = @{NSLocalizedFailureReasonErrorKey: NSLocalizedString(errorMessage, nil)};
+            NSError *error = [NSError errorWithDomain:@"com.rnshare" code:2 userInfo:userInfo];
+            failureCallback(error);
+            
         }
     }
 
